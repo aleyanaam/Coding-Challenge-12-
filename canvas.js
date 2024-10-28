@@ -21,9 +21,9 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('mousemove', (e) => {
     if (!drawing) return;
     
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
-    // Redraw the background
+    
     ctx.fillStyle = '#f0f0f0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -44,4 +44,22 @@ canvas.addEventListener('mousemove', (e) => {
             break;
     }
     ctx.stroke();
+});
+canvas.addEventListener('mouseup', () => {
+    drawing = false;
+    ctx.closePath();
+});
+
+//Allows the user to clear the canvas
+document.getElementById('clearCanvas').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#f0f0f0'; 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+});
+
+//Allows user to select the tool
+document.querySelectorAll('input[name="tool"]').forEach(input => {
+    input.addEventListener('change', (e) => {
+        currentTool = e.target.value;
+    });
 });
